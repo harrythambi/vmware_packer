@@ -8,5 +8,7 @@
     "cluster": "INSERT-VCENTER-CLUSTER",
     "network": "INSERT-VCENTER-PORTGROUP",
     "winrm_username": "INSERT-TEMPLATE-OS-USERNAME",
-    "winrm_password": "INSERT-TEMPLATE-OS-PASSWORD"
+    "winrm_password": "INSERT-TEMPLATE-OS-PASSWORD",
+    "content_library": "INSERT-CONTENT-LIBRARY",
+    "template_name": "INSERT-TEMPLATE-NAME"
 }
