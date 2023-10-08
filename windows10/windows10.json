@@ -17,8 +17,8 @@
         "guest_os_type": "windows9_64Guest",
         "insecure_connection": "true",
         "iso_paths": [
-          "[{{user `datastore_iso`}}] {{user `datastore_iso_folder`}}Windows10.iso",
-          "[{{user `datastore_iso`}}] {{user `datastore_iso_folder`}}VMware-tools-windows-11.3.0-18090558.iso"
+          "[{{user `datastore_iso`}}] {{user `datastore_iso_folder`}}/Windows10.iso",
+          "[{{user `datastore_iso`}}] {{user `datastore_iso_folder`}}/VMware-tools-windows-11.3.0-18090558.iso"
         ],
         "network_adapters": [
           {

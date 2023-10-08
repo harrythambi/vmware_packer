@@ -1,12 +1,12 @@
 {
-    "vcenter_server":"mp-vcsa-1.harrythambi.cloud",
-    "username":"administrator@vsphere.local",
-    "password":"VMware1!VMware1!",
-    "datastore":"esx01_nvme01",
-    "datastore_iso":"esx01_nvme01",
-    "datastore_iso_folder": "ISOs/",
-    "cluster": "mp_mgmt_cluster",
-    "network": "mp_packer_lan",
-    "winrm_username": "Administrator",
-    "winrm_password": "VMware1!VMware1!"
+    "vcenter_server":"INSERT-VCENTER-HOSTNAME-OR-IP",
+    "username":"INSERT-VCENTER-USERNAME",
+    "password":"INSERT-VCENTER-PASSWORD",
+    "datastore":"INSERT-VCENTER-DATASTORE",
+    "datastore_iso":"INSERT-VCENTER-DATASTORE-ISO",
+    "datastore_iso_folder": "INSERT-VCENTER-DATASTORE-ISO-FOLDER",
+    "cluster": "INSERT-VCENTER-CLUSTER",
+    "network": "INSERT-VCENTER-PORTGROUP",
+    "winrm_username": "INSERT-TEMPLATE-OS-USERNAME",
+    "winrm_password": "INSERT-TEMPLATE-OS-PASSWORD"
 }
