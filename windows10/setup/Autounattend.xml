@@ -20,7 +20,7 @@
                 <ProductKey>
                     <!-- Do not uncomment the Key element if you are using trial ISOs -->
                     <!-- You must uncomment the Key element (and optionally insert your own key) if you are using retail or volume license ISOs -->
-                    <Key>YNJGW-QBT6K-Y4BGR-HCB8W-BWRC6</Key>
+                    <Key>INSERT-YOUR-WIN-PRODUCT-KEY-HERE</Key>
                     <WillShowUI>OnError</WillShowUI>
                 </ProductKey>
                 <AcceptEula>true</AcceptEula>
