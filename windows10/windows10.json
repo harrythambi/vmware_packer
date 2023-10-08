@@ -1,0 +1,54 @@
+{
+    "builders": [
+      {
+        "CPUs": 2,
+        "RAM": 8192,
+        "RAM_reserve_all": true,
+        "boot_order": "disk,cdrom",
+        "cluster": "{{user `cluster`}}",
+        "communicator": "winrm",
+        "create_snapshot": "false",
+        "datastore": "{{user `datastore`}}",
+        "disk_controller_type": "lsilogic-sas",
+        "floppy_files": [
+          "{{template_dir}}/setup/"
+        ],
+        "floppy_img_path": "[{{user `datastore`}}] Floppies/pvscsi-Windows8.flp",
+        "guest_os_type": "windows9_64Guest",
+        "insecure_connection": "true",
+        "iso_paths": [
+          "[{{user `datastore_iso`}}] {{user `datastore_iso_folder`}}Windows10.iso",
+          "[{{user `datastore_iso`}}] {{user `datastore_iso_folder`}}VMware-tools-windows-11.3.0-18090558.iso"
+        ],
+        "network_adapters": [
+          {
+            "network": "{{user `network`}}",
+            "network_card": "vmxnet3"
+          }
+        ],
+        "password": "{{user `password`}}",
+        "storage": [
+          {
+            "disk_size": 51200,
+            "disk_thin_provisioned": true
+          }
+        ],
+        "type": "vsphere-iso",
+        "username": "{{user `username`}}",
+        "vcenter_server": "{{user `vcenter_server`}}",
+        "vm_name": "Windows 10 (PILOT)",
+        "vm_version": 15,
+        "winrm_password": "{{user `winrm_password`}}",
+        "winrm_username": "{{user `winrm_username`}}"
+      }
+    ],
+    "provisioners": [
+      {
+        "inline": [
+          "Get-AppXPackage -AllUsers | Where {($_.name -notlike \"Photos\") -and ($_.Name -notlike \"Calculator\") -and ($_.Name -notlike \"Store\")} | Remove-AppXPackage -ErrorAction SilentlyContinue",
+          "Get-AppXProvisionedPackage -Online | Where {($_.DisplayName -notlike \"Photos\") -and ($_.DisplayName -notlike \"Calculator\") -and ($_.DisplayName -notlike \"Store\")} | Remove-AppXProvisionedPackage -Online -ErrorAction SilentlyContinue"
+        ],
+        "type": "powershell"
+      }
+    ]
+  }
