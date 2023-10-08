@@ -127,6 +127,12 @@
                     <CommandLine>cmd /c reg add "HKLM\SOFTWARE\Microsoft\PowerShell\1\ShellIds\Microsoft.PowerShell" /v ExecutionPolicy /t REG_SZ /d Unrestricted /f</CommandLine>
                     <RequiresUserInput>true</RequiresUserInput>
                 </SynchronousCommand>
+                <SynchronousCommand wcm:action="add">
+                    <Order>3</Order>
+                    <!-- Install Cloudbase Init -->
+                    <CommandLine>powershell -ExecutionPolicy Bypass -File a:\cloudbase-init-windows.ps1</CommandLine>
+                    <RequiresUserInput>true</RequiresUserInput>
+                </SynchronousCommand>
               </FirstLogonCommands>
         </component>
     </settings>
