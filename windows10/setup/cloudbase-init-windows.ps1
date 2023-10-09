@@ -81,7 +81,7 @@ Write-Host "Creating new Cloudbase-Init ${cloudbaseInitUnattendConfigFile} File 
 New-Item -Path $cloudbaseInitInstallPath -Name $cloudbaseInitUnattendConfigFile -ItemType File -Force -Value $unattendContent | Out-Null
 
 Write-Host "Enabling automatic startup for Cloudbase-init ..."
-Get-Service -Name cloudbase-init | Set-Service -StartupType Automatic
+Start-Process sc.exe -ArgumentList "config cloudbase-init start= delayed-auto" -wait | Out-Null
 
 Write-Host "Cleaning up Cloudbase-Init installer ..."
 Remove-Item C:\$cloudbaseInitInstaller -Confirm:$false
