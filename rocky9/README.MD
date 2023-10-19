@@ -1,5 +1,2 @@
-# Update Windows Product Key
-sed -i 's/INSERT-YOUR-WIN-PRODUCT-KEY-HERE/${input.windows10_key}/g' /tmp/vmware_packer/windows10/setup/Autounattend.xml
-
 # Packer Build
 packer build -force -var 'vcenter_server=${input.vcenter_server}' -var 'vcenter_username=${input.vsphere_username}' -var 'vcenter_password=${input.vsphere_password}' -var 'build_username=${input.winrm_username}' -var 'build_password=${input.winrm_password}' -var 'vcenter_datastore=${input.datastore}' -var 'os_iso_datastore=${input.datastore_iso}' -var 'os_iso_path=${input.datastore_iso_folder}' -var 'vcenter_cluster=${input.cluster}' -var 'vcenter_network=${input.network}' -var 'vcenter_content_library=${input.content_library}' -var 'template_name=${input.template_name}' /tmp/vmware_packer/rocky9/rocky.pkr.hcl
