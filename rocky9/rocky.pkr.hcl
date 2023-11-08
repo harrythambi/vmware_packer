@@ -11,7 +11,8 @@ packer {
 locals { 
     build_version       = formatdate("YY.MM", timestamp())
     build_date          = formatdate("YYYY-MM-DD hh:mm ZZZ", timestamp())
-    iso_paths           = ["[${var.common_iso_datastore}] ${var.iso_path}/${var.iso_file}"]
+    iso_paths           = ["[${ var.os_iso_datastore }] ${ var.os_iso_path }/${ var.os_iso_file }"]
+    script_files        = ["${path.root}/setup/setup.sh"]
     ks_content          = {
                             "ks.cfg" = templatefile("${abspath(path.root)}/setup/ks.pkrtpl.hcl", {
                                 build_username            = var.build_username
@@ -30,7 +31,6 @@ source "vsphere-iso" "rocky" {
     username                    = var.vcenter_username
     password                    = var.vcenter_password
     insecure_connection         = var.vcenter_insecure
-    datacenter                  = var.vcenter_datacenter
     cluster                     = var.vcenter_cluster
     folder                      = var.vcenter_folder
     datastore                   = var.vcenter_datastore
@@ -90,10 +90,11 @@ source "vsphere-iso" "rocky" {
 }
 
 build {
+    name                        = var.template_name
     sources                     = ["source.vsphere-iso.rocky"]
 
     provisioner "shell" {
-        execute_command         = "echo '${ var.build_password }' | {{.Vars}} sudo -E -S sh -eu '{{.Path}}'"
-        scripts                 = var.script_files
+        execute_command         = "echo '${ var.build_password }' | {{ .Vars }} sudo -E -S sh -eu '{{.Path}}'"
+        scripts                 = local.scripts_folder
     }
 }
