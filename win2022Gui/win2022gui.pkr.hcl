@@ -95,6 +95,6 @@ build {
 
     provisioner "shell" {
         execute_command         = "echo '${ var.build_password }' | {{ .Vars }} sudo -E -S sh -eu '{{.Path}}'"
-        scripts                 = local.script_files
+        scripts                 = local.scripts_folder
     }
 }
