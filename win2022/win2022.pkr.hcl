@@ -25,16 +25,16 @@ locals {
   build_by                   = "Built by: HashiCorp Packer ${packer.version}"
   build_date                 = formatdate("YYYY-MM-DD hh:mm ZZZ", timestamp())
   build_version              = formatdate("YYYY-MM", timestamp())
-  build_description          = "VER: ${ local.build_version }\nDATE: ${ local.build_date }\nISO: ${ var.os_iso_file }\nUSERNAME: ${ var.build_username }\nPASSWORD: ${ var.build_password }"
-  iso_paths                  = ["[${ var.os_iso_datastore }] ${ var.os_iso_path }/${ var.os_iso_file }", "[] /vmimages/tools-isoimages/${var.vm_guest_os_family}.iso"]
-  // manifest_date              = formatdate("YYYY-MM-DD hh:mm:ss", timestamp())
+  build_description          = "VER: ${ local.build_version }\nDATE: ${ local.build_date }\nISO: ${ var.iso_file }\nUSERNAME: ${ var.build_username }\nPASSWORD: ${ var.build_password }"
+  iso_paths                  = ["[${ var.common_iso_datastore }] ${ var.iso_path }/${ var.iso_file }", "[] /vmimages/tools-isoimages/${ var.vm_guest_os_family }.iso"]
+  manifest_date              = formatdate("YYYY-MM-DD hh:mm:ss", timestamp())
   // manifest_path              = "${path.cwd}/manifests/"
   // manifest_output            = "${local.manifest_path}${local.manifest_date}.json"
   // ovf_export_path            = "${path.cwd}/artifacts/"
-  vm_name_datacenter_core    = "${var.vm_guest_os_family}-${var.vm_guest_os_name}-${var.vm_guest_os_version}-${var.vm_guest_os_edition_datacenter}-${var.vm_guest_os_experience_core}-${local.build_version}"
-  vm_name_datacenter_desktop = "${var.vm_guest_os_family}-${var.vm_guest_os_name}-${var.vm_guest_os_version}-${var.vm_guest_os_edition_datacenter}-${var.vm_guest_os_experience_desktop}-${local.build_version}"
-  vm_name_standard_core      = "${var.vm_guest_os_family}-${var.vm_guest_os_name}-${var.vm_guest_os_version}-${var.vm_guest_os_edition_standard}-${var.vm_guest_os_experience_core}-${local.build_version}"
-  vm_name_standard_desktop   = "${var.vm_guest_os_family}-${var.vm_guest_os_name}-${var.vm_guest_os_version}-${var.vm_guest_os_edition_standard}-${var.vm_guest_os_experience_desktop}-${local.build_version}"
+  // vm_name_datacenter_core    = "${var.vm_guest_os_family}-${var.vm_guest_os_name}-${var.vm_guest_os_version}-${var.vm_guest_os_edition_datacenter}-${var.vm_guest_os_experience_core}-${local.build_version}"
+  // vm_name_datacenter_desktop = "${var.vm_guest_os_family}-${var.vm_guest_os_name}-${var.vm_guest_os_version}-${var.vm_guest_os_edition_datacenter}-${var.vm_guest_os_experience_desktop}-${local.build_version}"
+  vm_name_standard_core      = "${ var.vm_guest_os_family }-${ var.vm_guest_os_name }-${ var.vm_guest_os_version }-${ var.vm_guest_os_edition_standard }-${ var.vm_guest_os_experience_core }-${ local.build_version }"
+  vm_name_standard_desktop   = "${ var.vm_guest_os_family }-${ var.vm_guest_os_name }-${ var.vm_guest_os_version }-${ var.vm_guest_os_edition_standard }-${ var.vm_guest_os_experience_desktop }-${ local.build_version }"
   // bucket_name                = replace("${var.vm_guest_os_family}-${var.vm_guest_os_name}-${var.vm_guest_os_version}", ".", "")
   // bucket_description         = "${var.vm_guest_os_family} ${var.vm_guest_os_name} ${var.vm_guest_os_version}"
 }
@@ -45,27 +45,25 @@ locals {
 source "vsphere-iso" "windows-server-standard-core" {
 
   // vCenter Server Endpoint Settings and Credentials
-  vcenter_server      = var.vcenter_server
-  username            = var.vcenter_username
-  password            = var.vcenter_password
+  vcenter_server      = var.vsphere_endpoint
+  username            = var.vsphere_username
+  password            = var.vsphere_password
   insecure_connection = var.vsphere_insecure_connection
 
   // vSphere Settings
-  cluster    = var.vcenter_cluster
-  datastore  = var.vcenter_datastore
-  folder     = var.vcenter_folder
+  cluster    = var.vsphere_cluster
+  datastore  = var.vsphere_datastore
+  folder     = var.vsphere_folder
 
   # Content Library and Template Settings
-  convert_to_template         = var.vcenter_convert_template
-  create_snapshot             = var.vcenter_snapshot
-  snapshot_name               = var.vcenter_snapshot_name
+  convert_to_template         = var.common_template_conversion
   content_library_destination {
-      library                 = var.vcenter_content_library
+      library                 = var.common_content_library_name
       name                    = local.vm_name_standard_core
-      description             = local.vm_description
-      ovf                     = var.vcenter_content_library_ovf
-      destroy                 = var.vcenter_content_library_destroy
-      skip_import             = var.vcenter_content_library_skip
+      description             = local.build_description
+      ovf                     = var.common_content_library_ovf
+      destroy                 = var.common_content_library_destroy
+      skip_import             = var.common_content_library_skip_export
   }
 
   // Virtual Machine Settings
@@ -86,7 +84,7 @@ source "vsphere-iso" "windows-server-standard-core" {
     disk_thin_provisioned = var.vm_disk_thin_provisioned
   }
   network_adapters {
-    network      = var.vcenter_network
+    network      = var.vsphere_network
     network_card = var.vm_network_card
   }
   
@@ -129,27 +127,25 @@ source "vsphere-iso" "windows-server-standard-core" {
 source "vsphere-iso" "windows-server-standard-dexp" {
 
   // vCenter Server Endpoint Settings and Credentials
-  vcenter_server      = var.vcenter_server
-  username            = var.vcenter_username
-  password            = var.vcenter_password
+  vcenter_server      = var.vsphere_endpoint
+  username            = var.vsphere_username
+  password            = var.vsphere_password
   insecure_connection = var.vsphere_insecure_connection
 
   // vSphere Settings
-  cluster    = var.vcenter_cluster
-  datastore  = var.vcenter_datastore
-  folder     = var.vcenter_folder
+  cluster    = var.vsphere_cluster
+  datastore  = var.vsphere_datastore
+  folder     = var.vsphere_folder
 
   # Content Library and Template Settings
-  convert_to_template         = var.vcenter_convert_template
-  create_snapshot             = var.vcenter_snapshot
-  snapshot_name               = var.vcenter_snapshot_name
+  convert_to_template         = var.common_template_conversion
   content_library_destination {
-      library                 = var.vcenter_content_library
-      name                    = local.vm_name_standard_desktop
-      description             = local.vm_description
-      ovf                     = var.vcenter_content_library_ovf
-      destroy                 = var.vcenter_content_library_destroy
-      skip_import             = var.vcenter_content_library_skip
+      library                 = var.common_content_library_name
+      name                    = local.vm_name_standard_core
+      description             = local.build_description
+      ovf                     = var.common_content_library_ovf
+      destroy                 = var.common_content_library_destroy
+      skip_import             = var.common_content_library_skip_export
   }
 
   // Virtual Machine Settings
@@ -171,7 +167,7 @@ source "vsphere-iso" "windows-server-standard-dexp" {
     disk_thin_provisioned = var.vm_disk_thin_provisioned
   }
   network_adapters {
-    network      = var.vcenter_network
+    network      = var.vsphere_network
     network_card = var.vm_network_card
   }
 
@@ -250,7 +246,7 @@ build {
   }
 
   post-processor "manifest" {
-    output     = local.manifest_output
+    output     = "manifest_${local.manifest_date}.json"
     strip_path = true
     strip_time = true
     custom_data = {
@@ -264,11 +260,11 @@ build {
       vm_firmware              = var.vm_firmware
       vm_guest_os_type         = var.vm_guest_os_type
       vm_mem_size              = var.vm_mem_size
-      vm_network               = var.vcenter_network
-      vsphere_cluster          = var.vcenter_cluster
-      vsphere_datastore        = var.vcenter_datastore
-      vsphere_endpoint         = var.vcenter_server
-      vsphere_folder           = var.vcenter_folder
+      vm_network               = var.vsphere_network
+      vsphere_cluster          = var.vsphere_cluster
+      vsphere_datastore        = var.vsphere_datastore
+      vsphere_endpoint         = var.vsphere_endpoint
+      vsphere_folder           = var.vsphere_folder
     }
   }
 

@@ -60,7 +60,7 @@ communicator_port    = 5985
 communicator_timeout = "12h"
 
 // Provisioner Settings
-scripts = ["scripts/windows/windows-prepare.ps1"]
+script_files = ["scripts/setup.ps1"]
 inline = [
   "Get-EventLog -LogName * | ForEach { Clear-EventLog -LogName $_.Log }"
 ]
