@@ -39,7 +39,7 @@ New-ItemProperty -Path "HKLM:\SOFTWARE\OpenSSH" -Name DefaultShell -Value "C:\Wi
 Write-Host "-- Installing Cloudbase-Init ..."
 $msiLocation = 'https://cloudbase.it/downloads'
 $msiFileName = 'CloudbaseInitSetup_Stable_x64.msi'
-Invoke-WebRequest -Uri ($msiLocation + '/' + $msiFileName) -OutFile C:\$msiFileName
+Invoke-WebRequest -Uri "($msiLocation + '/' + $msiFileName)" -OutFile C:\$msiFileName
 Unblock-File -Path C:\$msiFileName
 Start-Process msiexec.exe -ArgumentList "/i C:\$msiFileName /qn /norestart RUN_SERVICE_AS_LOCAL_SYSTEM=1" -Wait
 Write-Host " - Configuring Cloudbase-Init for VMwareGuestInfoService ..."
