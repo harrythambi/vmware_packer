@@ -5,7 +5,7 @@ sudo dnf update -y -q &>/dev/null
 ## Install core packages
 echo '-- Installing additional packages ...'
 sudo dnf install -y -q ca-certificates dnf-plugins-core &>/dev/null
-sudo dnf install -y -q cloud-init perl python3 cloud-utils-growpart &>/dev/null
+sudo dnf install -y -q perl python3 &>/dev/null
 
 ## Adding additional repositories
 echo '-- Adding repositories ...'
@@ -24,13 +24,13 @@ sudo sed -i "s/.*PubkeyAuthentication.*/PubkeyAuthentication yes/g" /etc/ssh/ssh
 sudo sed -i "s/PasswordAuthentication no/PasswordAuthentication yes/g" /etc/ssh/sshd_config
 
 ## Configure cloud-init
-echo '-- Configuring cloud-init ...'
-sudo cat << CLOUDCFG > /etc/cloud/cloud.cfg.d/99-vmware-guest-customization.cfg
-disable_vmware_customization: false
-datasource:
-  VMware:
-    vmware_cust_file_max_wait: 20
-CLOUDCFG
+# echo '-- Configuring cloud-init ...'
+# sudo cat << CLOUDCFG > /etc/cloud/cloud.cfg.d/99-vmware-guest-customization.cfg
+# disable_vmware_customization: false
+# datasource:
+#   VMware:
+#     vmware_cust_file_max_wait: 20
+# CLOUDCFG
 
 ## Final cleanup actions
 echo '-- Executing final cleanup tasks ...'
@@ -40,7 +40,7 @@ fi
 sudo rm -rf /tmp/*
 sudo rm -rf /var/tmp/*
 sudo rm -f /etc/machine-id
-sudo cloud-init clean --logs --seed
+# sudo cloud-init clean --logs --seed
 sudo rm -f /etc/ssh/ssh_host_*
 if [ -f /var/log/audit/audit.log ]; then
     sudo cat /dev/null > /var/log/audit/audit.log
