@@ -188,7 +188,7 @@
                <RequiresUserInput>true</RequiresUserInput>
             </SynchronousCommand>
             <SynchronousCommand wcm:action="add">
-               <CommandLine>%SystemRoot%\system32\WindowsPowerShell\v1.0\powershell.exe -File F:\setup\windows-vmtools.ps1</CommandLine>
+               <CommandLine>cmd.exe /c e:\setup64 /s /v "/qb REBOOT=R"</CommandLine>
                <Order>3</Order>
                <Description>Install VMware Tools</Description>
             </SynchronousCommand>
