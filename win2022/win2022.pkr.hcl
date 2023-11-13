@@ -91,10 +91,10 @@ source "vsphere-iso" "windows-server-standard-core" {
   // Removable Media Settings
   iso_paths = local.iso_paths
   cd_files = [
-    "${path.root}/setup/"
+    "${path.root}/setup"
   ]
   cd_content = {
-    "autounattend.xml" = templatefile("${abspath(path.root)}/setup/autounattend.pkrtpl.hcl", {
+    "autounattend.xml" = templatefile("${abspath(path.root)}/config/auto.pkrtpl.hcl", {
       build_username       = var.build_username
       build_password       = var.build_password
       vm_inst_os_language  = var.vm_inst_os_language
@@ -174,10 +174,10 @@ source "vsphere-iso" "windows-server-standard-dexp" {
   // Removable Media Settings
   iso_paths = local.iso_paths
   cd_files = [
-    "${path.root}/setup/"
+    "${path.root}/setup"
   ]
   cd_content = {
-    "autounattend.xml" = templatefile("${abspath(path.root)}/setup/autounattend.pkrtpl.hcl", {
+    "autounattend.xml" = templatefile("${abspath(path.root)}/config/auto.pkrtpl.hcl", {
       build_username       = var.build_username
       build_password       = var.build_password
       vm_inst_os_language  = var.vm_inst_os_language

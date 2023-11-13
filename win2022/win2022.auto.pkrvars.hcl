@@ -18,8 +18,8 @@ vm_inst_os_image_datacenter_desktop = "Windows Server 2022 SERVERDATACENTER"
 vm_inst_os_kms_key_datacenter       = "WX4NM-KYWYW-QJJR4-XV3QB-6VM33"
 
 // Guest Operating System Metadata
-vm_guest_os_language           = "en-GB"
-vm_guest_os_keyboard           = "en-GB"
+vm_guest_os_language           = "en-US"
+vm_guest_os_keyboard           = "en-US"
 vm_guest_os_timezone           = "UTC"
 vm_guest_os_family             = "windows"
 vm_guest_os_name               = "server"
@@ -41,13 +41,13 @@ vm_cpu_hot_add           = false
 vm_mem_size              = 4096
 vm_mem_hot_add           = false
 vm_disk_size             = 102400
-vm_disk_controller_type  = ["pvscsi"]
+vm_disk_controller_type  = ["lsilogic-sas"]
 vm_disk_thin_provisioned = true
 vm_network_card          = "vmxnet3"
 
 // Removable Media Settings
 iso_path = "ISOs"
-iso_file = "win_server_2022_eval.iso"
+iso_file = "en-us_windows_server_2022_updated_jan_2022_x64_dvd_f7ca3012.iso"
 
 // Boot Settings
 vm_boot_order       = "disk,cdrom"
