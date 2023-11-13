@@ -141,7 +141,7 @@ source "vsphere-iso" "windows-server-standard-dexp" {
   convert_to_template         = var.common_template_conversion
   content_library_destination {
       library                 = var.common_content_library_name
-      name                    = local.vm_name_standard_core
+      name                    = local.vm_name_standard_desktop
       description             = local.build_description
       ovf                     = var.common_content_library_ovf
       destroy                 = var.common_content_library_destroy
