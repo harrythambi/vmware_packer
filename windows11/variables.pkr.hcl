@@ -1,330 +1,444 @@
-variable "template_name" {
-    type        = string
-    description = "Template name"
+variable "vsphere_endpoint" {
+  type        = string
+  description = "The fully qualified domain name or IP address of the vCenter Server instance."
 }
 
-variable "vcenter_username" {
-    type        = string
-    description = "Username used by Packer to connect to vCenter"
-    sensitive   = true
+variable "vsphere_username" {
+  type        = string
+  description = "The username to login to the vCenter Server instance."
+  sensitive   = true
 }
 
-variable "vcenter_password" {
-    type        = string
-    description = "Password used by Packer to connect to vCenter"
-    sensitive   = true
+variable "vsphere_password" {
+  type        = string
+  description = "The password for the login to the vCenter Server instance."
+  sensitive   = true
 }
 
-variable "build_username" {
-    type        = string
-    description = "Non-administrative username for this OS"
-    sensitive   = true
+variable "vsphere_insecure_connection" {
+  type        = bool
+  description = "Do not validate vCenter Server TLS certificate."
+  default     = true
 }
 
-variable "build_password" {
-    type        = string
-    description = "Password for the non-administrative user"
-    sensitive   = true
+// vSphere Settings
+
+variable "vsphere_datacenter" {
+  type        = string
+  description = "The name of the target vSphere datacenter."
+  default     = null
 }
 
-variable "build_configmgmt_user" {
-    type        = string
-    description = "Name of the user to be used by Configuration Management tooling"
-    sensitive   = true
-    default = ""
+variable "vsphere_cluster" {
+  type        = string
+  description = "The name of the target vSphere cluster."
+  default     = null
 }
 
-variable "build_configmgmt_key" {
-    type        = string
-    description = "SSH key for the Configuration Management tooling user"
-    sensitive   = true
-    default = ""
+variable "vsphere_host" {
+  type        = string
+  description = "The name of the target ESXi host."
+  default     = null
 }
 
-variable "rhsm_user" {
-    type        = string
-    description = "RedHat Subscription Manager username"
-    sensitive   = true
-    default = ""
+variable "vsphere_datastore" {
+  type        = string
+  description = "The name of the target vSphere datastore."
+  default     = null
+
 }
 
-variable "rhsm_pass" {
-    type        = string
-    description = "RedHat Subscription Manager password"
-    sensitive   = true
-    default = ""
+variable "vsphere_network" {
+  type        = string
+  description = "The name of the target vSphere network segment."
+  default     = null
+
 }
 
-# vCenter Configuration
-variable "vcenter_server" {
-    type        = string
-    description = "FQDN for the vCenter Server Packer will create this build in"
-    default = ""
+variable "vsphere_folder" {
+  type        = string
+  description = "The name of the target vSphere folder."
+  default     = ""
 }
 
-variable "vcenter_insecure" {
-    type        = bool
-    description = "Validate the SSL connection to vCenter"
-    default     = true
+// Installer Settings
+
+variable "vm_inst_os_language" {
+  type        = string
+  description = "The installation operating system lanugage."
+  default     = "en-US"
 }
 
-variable "vcenter_datacenter" {
-    type        = string
-    description = "Datacenter name in vCenter where the build will be created"
-    default = ""
+variable "vm_inst_os_keyboard" {
+  type        = string
+  description = "The installation operating system keyboard input."
+  default     = "en-US"
 }
 
-variable "vcenter_cluster" {
-    type        = string
-    description = "Cluster name in vCenter where the build will be created"
+variable "vm_inst_os_image_standard_core" {
+  type        = string
+  description = "The installation operating system image input for Microsoft Windows Standard Core."
+  default     = null
 }
 
-variable "vcenter_folder" {
-    type        = string
-    description = "Folder path in vCenter where the build will be created"
-    default = "Discovered virtual machine"
+variable "vm_inst_os_image_standard_desktop" {
+  type        = string
+  description = "The installation operating system image input for Microsoft Windows Standard."
+  default     = null  
 }
 
-variable "vcenter_datastore" {
-    type        = string
-    description = "vSphere datastore where the build will be created"
+variable "vm_inst_os_kms_key_standard" {
+  type        = string
+  description = "The installation operating system KMS key input for Microsoft Windows Standard edition."
+  default     = null
 }
 
-variable "vcenter_network" {
-    type        = string
-    description = "vSphere network where the build will be created"
+variable "vm_inst_os_image_datacenter_core" {
+  type        = string
+  description = "The installation operating system image input for Microsoft Windows Datacenter Core."
+  default     = null
 }
 
-# vCenter and ISO Configuration
-variable "os_iso_datastore" {
-    type        = string
-    description = "vSphere datastore name where source OS media reside"
+variable "vm_inst_os_image_datacenter_desktop" {
+  type        = string
+  description = "The installation operating system image input for Microsoft Windows Datacenter."
+  default     = null
 }
 
-variable "os_iso_path" {
-    type        = string
-    description = "Datastore path to the OS media"
+variable "vm_inst_os_kms_key_datacenter" {
+  type        = string
+  description = "The installation operating system KMS key input for Microsoft Windows Datacenter edition."
+  default     = null
 }
 
-variable "os_iso_file" {
-    type        = string
-    description = "OS media file"
+// Virtual Machine Settings
+
+variable "vm_guest_os_language" {
+  type        = string
+  description = "The guest operating system lanugage."
+  default     = "en-US"
 }
 
-# OS Meta Data
-variable "vm_os_family" {
-    type        = string
-    description = "The family that the OS belongs to (e.g. 'Windows' or 'Linux')"
+variable "vm_guest_os_keyboard" {
+  type        = string
+  description = "The guest operating system keyboard input."
+  default     = "en-US"
 }
 
-variable "vm_os_vendor" {
-    type        = string
-    description = "The vendor or product name for the OS (e.g. 'Photon', 'RHEL', 'CentOS, 'Ubuntu', 'Windows' etc)"
+variable "vm_guest_os_timezone" {
+  type        = string
+  description = "The guest operating system timezone."
+  default     = "UTC"
 }
 
-variable "vm_os_type" {
-    type        = string
-    description = "The type of OS (e.g. 'Server' or 'Desktop')"
-    default     = "Server"
+variable "vm_guest_os_family" {
+  type        = string
+  description = "The guest operating system family. Used for naming and VMware Tools."
+  default     = null
 }
 
-variable "vm_os_version" {
-    type        = string
-    description = "The major version of the OS (e.g. '7', '8.5', '2022')"
+variable "vm_guest_os_name" {
+  type        = string
+  description = "The guest operating system name. Used for naming."
+  default     = null
 }
 
-# Virtual Machine OS Settings
-variable "vm_guestos_type" {
-    type        = string
-    description = "The type of guest operating system (or guestid) in vSphere"
+variable "vm_guest_os_version" {
+  type        = string
+  description = "The guest operating system version. Used for naming."
+  default     = null
 }
 
-variable "vm_guestos_language" {
-    type        = string
-    description = "The language that the guest OS will be configured with"
-    default     = "en-GB"
+variable "vm_guest_os_edition_standard" {
+  type        = string
+  description = "The guest operating system edition. Used for naming."
+  default     = "standard"
 }
 
-variable "vm_guestos_keyboard" {
-    type        = string
-    description = "The keyboard type that the guest OS will use"
-    default     = "en-GB"
+variable "vm_guest_os_edition_datacenter" {
+  type        = string
+  description = "The guest operating system edition. Used for naming."
+  default     = "datacenter"
 }
 
-variable "vm_guestos_timezone" {
-    type        = string
-    description = "The timezone the guest OS will be set to"
-    default     = "GMT Standard Time"
+variable "vm_guest_os_experience_core" {
+  type        = string
+  description = "The guest operating system minimal experience. Used for naming."
+  default     = "core"
 }
 
-variable "vm_guestos_systemlocale" {
-    type        = string
-    description = "The language that the guest OS will be configured with"
-    default     = "en-US"
+variable "vm_guest_os_experience_desktop" {
+  type        = string
+  description = "The guest operating system desktop experience. Used for naming."
+  default     = "dexp"
 }
 
-# Virtual Machine Hardware Settings
+variable "vm_guest_os_type" {
+  type        = string
+  description = "The guest operating system type, also know as guestid."
+  default     = null
+}
+
 variable "vm_firmware" {
-    type        = string
-    description = "Type of VM firmware to use (one of 'efi', 'efi-secure' or 'bios')"
-    default     = "efi-secure"
-}
-
-variable "vm_hardware_version" {
-    type        = number
-    description = "Version of VM hardware to use (e.g. '18' or '19' etc)"
-    default     = 19
-}
-
-variable "vm_boot_order" {
-    type        = string
-    description = "Set the comma-separated boot order for the VM (e.g. 'disk,cdrom')"
-    default     = "disk,cdrom"
-}
-
-variable "vm_boot_wait" {
-    type        = string
-    description = "Set the delay for the VM to wait after booting before the boot command is sent (e.g. '1h5m2s' or '2s')"
-    default     = "2s"
-}
-
-variable "vm_tools_policy" {
-    type        = bool
-    description = "Upgrade VM tools on reboot?"
-    default     = true
-}
-
-variable "vm_cpu_sockets" {
-    type        = number
-    description = "The number of CPU sockets for the VM"
-    default     = 1
-}
-
-variable "vm_cpu_cores" {
-    type        = number
-    description = "The number of cores per CPU socket for the VM"
-    default     = 1
-}
-
-variable "vm_cpu_hotadd" {
-    type        = bool
-    description = "Enable CPU hot-add"
-    default     = false
-}
-
-variable "vm_mem_size" {
-    type        = number
-    description = "The size of memory in MB for the VM"
-    default     = 2048
-}
-
-variable "vm_mem_hotadd" {
-    type        = bool
-    description = "Enable Memory hot-add"
-    default     = false
+  type        = string
+  description = "The virtual machine firmware."
+  default     = "efi-secure"
 }
 
 variable "vm_cdrom_type" {
-    type        = string
-    description = "Type of CD-ROM drive to add to the VM (e.g. 'sata' or 'ide')"
-    default     = "sata"
+  type        = string
+  description = "The virtual machine CD-ROM type."
+  default     = "sata"
 }
 
-variable "vm_cdrom_remove" {
-    type        = bool
-    description = "Remove CD-ROM drives when provisioning is complete?"
-    default     = true
+variable "vm_cpu_count" {
+  type        = number
+  description = "The number of virtual CPUs."
+  default     = 2
 }
 
-variable "vm_nic_type" {
-    type        = string
-    description = "Type of network card for the VM (e.g. 'e1000e' or 'vmxnet3')"
-    default     = "vmxnet3"
+variable "vm_cpu_cores" {
+  type        = number
+  description = "The number of virtual CPUs cores per socket."  
+  default     = 1
 }
 
-variable "vm_disk_controller" {
-    type        = list(string)
-    description = "An ordered list of disk controller types to be added to the VM (e.g. one of more of 'pvscsi', 'scsi' etc)"
-    default     = ["pvscsi"]
+variable "vm_cpu_hot_add" {
+  type        = bool
+  description = "Enable hot add CPU."
+  default     = false
+}
+
+variable "vm_mem_size" {
+  type        = number
+  description = "The size for the virtual memory in MB."
+  default     = 4096
+}
+
+variable "vm_mem_hot_add" {
+  type        = bool
+  description = "Enable hot add memory."
+  default     = false
 }
 
 variable "vm_disk_size" {
-    type        = number
-    description = "The size of system disk in MB for the VM"
-    default     = 40960
+  type        = number
+  description = "The size for the virtual disk in MB."
+  default     = 102400
 }
 
-variable "vm_disk_thin" {
-    type        = bool
-    description = "Thin provision the disk?"
-    default     = true
+variable "vm_disk_controller_type" {
+  type        = list(string)
+  description = "The virtual disk controller types in sequence."
+  default     = ["pvscsi"]
 }
 
-# vSphere Content Library and Template Configuration
-variable "vcenter_convert_template" {
-    type        = bool
-    description = "Convert the VM to a template?"
-    default     = false
+variable "vm_disk_thin_provisioned" {
+  type        = bool
+  description = "Thin provision the virtual disk."
+  default     = true
 }
 
-variable "vcenter_content_library" {
-    type        = string
-    description = "Name of the vSphere Content Library to export the VM to"
-    default     = null
+variable "vm_network_card" {
+  type        = string
+  description = "The virtual network card type."
+  default     = "vmxnet3"
 }
 
-variable "vcenter_content_library_ovf" {
-    type        = bool
-    description = "Export to Content Library as an OVF file?"
-    default     = true
+variable "common_vm_version" {
+  type        = number
+  description = "The vSphere virtual hardware version."
+  default     = 19
 }
 
-variable "vcenter_content_library_destroy" {
-    type        = bool
-    description = "Delete the VM after successfully exporting to a Content Library?"
-    default     = true
+variable "common_tools_upgrade_policy" {
+  type        = bool
+  description = "Upgrade VMware Tools on reboot."
+  default     = true
 }
 
-variable "vcenter_content_library_skip" {
-    type        = bool
-    description = "Skip adding the VM to a Content Library?"
-    default     = false
+variable "common_remove_cdrom" {
+  type        = bool
+  description = "Remove the virtual CD-ROM(s)."
+  default     = true
 }
 
-variable "vcenter_snapshot" {
-    type        = bool
-    description = "Create a snapshot of the VM?"
-    default     = false
+// Template and Content Library Settings
+
+variable "common_template_conversion" {
+  type        = bool
+  description = "Convert the virtual machine to template. Must be 'false' for content library."
+  default     = false
 }
 
-variable "vcenter_snapshot_name" {
-    type        = string
-    description = "Name of the snapshot to be created on the VM"
-    default     = "Created by Packer"
+variable "common_content_library_name" {
+  type        = string
+  description = "The name of the target vSphere content library, if used."
+  default     = null
 }
 
-# Timeout Settings
-variable "vm_ip_timeout" {
-    type        = string
-    description = "Set the timeout for the VM to obtain an IP address (e.g. '1h5m2s' or '2s')"
-    default     = "30m"
+variable "common_content_library_ovf" {
+  type        = bool
+  description = "Export to content library as an OVF template."
+  default     = true
 }
 
-variable "vm_shutdown_timeout" {
-    type = string
-    description = "Set the timeout for the VM to shutdown after the shutdown command is issued (e.g. '1h5m2s' or '2s')"
-    default     = "30m"
+variable "common_content_library_destroy" {
+  type        = bool
+  description = "Delete the virtual machine after exporting to the content library."
+  default     = true
 }
 
-# Provisioner Settings
+variable "common_content_library_skip_export" {
+  type        = bool
+  description = "Skip exporting the virtual machine to the content library. Option allows for testing/debugging without saving the machine image."
+  default     = false
+}
+
+// OVF Export Settings
+
+variable "common_ovf_export_enabled" {
+  type        = bool
+  description = "Enable OVF artifact export."
+  default     = false
+}
+
+variable "common_ovf_export_overwrite" {
+  type        = bool
+  description = "Overwrite existing OVF artifact."
+  default     = true
+}
+
+// Removable Media Settings
+
+variable "common_iso_datastore" {
+  type        = string
+  description = "The name of the source vSphere datastore for the guest operating system ISO."
+  default     = null
+}
+
+variable "iso_path" {
+  type        = string
+  description = "The path on the source vSphere datastore for the guest operating system ISO."
+  default     = null
+}
+
+variable "iso_file" {
+  type        = string
+  description = "The file name of the guest operating system ISO."
+  default     = null
+}
+
+// Boot Settings
+
+variable "common_data_source" {
+  type        = string
+  description = "The provisioning data source. One of `http` or `disk`."
+  default     = null
+}
+
+variable "common_http_ip" {
+  type        = string
+  description = "Define an IP address on the host to use for the HTTP server."
+  default     = null
+}
+
+variable "vm_boot_order" {
+  type        = string
+  description = "The boot order for virtual machines devices."
+  default     = "disk,cdrom"
+}
+
+variable "vm_boot_wait" {
+  type        = string
+  description = "The time to wait before boot."
+  default     = null
+}
+
+variable "vm_boot_command" {
+  type        = list(string)
+  description = "The virtual machine boot command."
+  default     = []
+}
+
+variable "vm_shutdown_command" {
+  type        = string
+  description = "Command(s) for guest operating system shutdown."
+  default     = null
+}
+
+variable "common_ip_wait_timeout" {
+  type        = string
+  description = "Time to wait for guest operating system IP address response."
+  default     = null  
+}
+
+variable "common_shutdown_timeout" {
+  type        = string
+  description = "Time to wait for guest operating system shutdown."
+  default     = null  
+}
+
+// Communicator Settings and Credentials
+
+variable "build_username" {
+  type        = string
+  description = "The username to login to the guest operating system."
+  sensitive   = true
+}
+
+variable "build_password" {
+  type        = string
+  description = "The password to login to the guest operating system."
+  sensitive   = true
+}
+
+variable "build_password_encrypted" {
+  type        = string
+  description = "The SHA-512 encrypted password to login to the guest operating system."
+  sensitive   = true
+  default     = null
+}
+
+variable "build_key" {
+  type        = string
+  description = "The public key to login to the guest operating system."
+  sensitive   = true
+  default     = null
+}
+
+// Communicator Credentials
+
+variable "communicator_port" {
+  type        = string
+  description = "The port for the communicator protocol."
+  default     = null  
+}
+
+variable "communicator_timeout" {
+  type        = string
+  description = "The timeout for the communicator protocol."
+  default     = null  
+}
+
+// Provisioner Settings
+
 variable "script_files" {
-    type        = list(string)
-    description = "List of OS scripts to execute"
-    default     = []
+  type        = list(string)
+  description = "A list of scripts and their relative paths to transfer and run."
+  default     = []
 }
 
-variable "inline_cmds" {
-    type        = list(string)
-    description = "List of OS commands to execute"
-    default     = []
+variable "inline" {
+  type        = list(string)
+  description = "A list of commands to run."
+  default     = []
+}
+
+// HCP Packer Settings
+
+variable "common_hcp_packer_registry_enabled" {
+  type        = bool
+  description = "Enable the HCP Packer registry."
+  default     = false
 }
