@@ -12,10 +12,10 @@
             <SetupUILanguage>
                 <UILanguage>en-US</UILanguage>
             </SetupUILanguage>
-            <InputLocale>${vm_guestos_keyboard}</InputLocale>
-            <SystemLocale>${vm_guestos_systemlocale}</SystemLocale>
-            <UILanguage>${vm_guestos_systemlocale}</UILanguage>
-            <UserLocale>${vm_guestos_language}</UserLocale>
+            <InputLocale>${vm_guest_os_keyboard}</InputLocale>
+            <SystemLocale>${vm_guest_os_systemlocale}</SystemLocale>
+            <UILanguage>${vm_guest_os_systemlocale}</UILanguage>
+            <UserLocale>${vm_guest_os_language}</UserLocale>
         </component>
         <component name="Microsoft-Windows-Setup" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS" xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
             <DiskConfiguration>
@@ -136,7 +136,7 @@
     </settings>    
     <settings pass="oobeSystem">
         <component name="Microsoft-Windows-International-Core" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS" xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-                <SystemLocale>${vm_guestos_systemlocale}</SystemLocale>
+                <SystemLocale>${vm_guest_os_systemlocale}</SystemLocale>
         </component>    
         <component name="Microsoft-Windows-Shell-Setup" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS" xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
             <AutoLogon>
@@ -157,7 +157,7 @@
                 <NetworkLocation>Home</NetworkLocation>
                 <ProtectYourPC>3</ProtectYourPC>
             </OOBE>
-            <TimeZone>${vm_guestos_timezone}</TimeZone>
+            <TimeZone>${vm_guest_os_timezone}</TimeZone>
             <UserAccounts>
                 <AdministratorPassword>
                     <Value>${admin_password}</Value>

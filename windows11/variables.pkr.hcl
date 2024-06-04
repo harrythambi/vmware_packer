@@ -77,25 +77,13 @@ variable "vm_inst_os_keyboard" {
 
 variable "vm_inst_os_image_11_pro" {
   type        = string
-  description = "The installation operating system image input for Microsoft Windows Standard Core."
+  description = "The installation operating system image input for Microsoft Windows 11 Pro."
   default     = null
 }
 
 variable "vm_inst_os_kms_key_standard" {
   type        = string
   description = "The installation operating system KMS key input for Microsoft Windows Standard edition."
-  default     = null
-}
-
-variable "vm_inst_os_image_datacenter_core" {
-  type        = string
-  description = "The installation operating system image input for Microsoft Windows Datacenter Core."
-  default     = null
-}
-
-variable "vm_inst_os_image_datacenter_desktop" {
-  type        = string
-  description = "The installation operating system image input for Microsoft Windows Datacenter."
   default     = null
 }
 
