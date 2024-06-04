@@ -19,7 +19,7 @@ vm_guest_os_keyboard           = "en-US"
 vm_guest_os_timezone           = "UTC"
 vm_guest_os_family             = "windows"
 vm_guest_os_version            = "11"
-vm_guest_os_edition_pro   = "pro"
+vm_guest_os_edition_pro        = "pro"
 
 // Virtual Machine Guest Operating System Setting
 vm_guest_os_type = "windows9_64Guest"

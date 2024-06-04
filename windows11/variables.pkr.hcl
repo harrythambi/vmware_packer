@@ -149,16 +149,10 @@ variable "vm_guest_os_version" {
   default     = null
 }
 
-variable "vm_guest_os_edition_standard" {
+variable "vm_guest_os_edition_pro" {
   type        = string
   description = "The guest operating system edition. Used for naming."
-  default     = "standard"
-}
-
-variable "vm_guest_os_edition_datacenter" {
-  type        = string
-  description = "The guest operating system edition. Used for naming."
-  default     = "datacenter"
+  default     = "pro"
 }
 
 variable "vm_guest_os_experience_core" {
