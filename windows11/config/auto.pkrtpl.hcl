@@ -184,10 +184,8 @@
                     <!-- Run Setup Script -->
                     <Description>Basic configuration</Description>
                     <CommandLine>%SystemRoot%\system32\WindowsPowerShell\v1.0\powershell.exe -File F:\setup\setup.ps1</CommandLine>
-               <Order>4</Order>
-               <Description>Initial Configuration</Description>
-            </SynchronousCommand>
-         </FirstLogonCommands>
-      </component>
-   </settings>
+                </SynchronousCommand>
+            </FirstLogonCommands>
+        </component>
+    </settings>
 </unattend>
