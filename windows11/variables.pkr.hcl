@@ -75,16 +75,10 @@ variable "vm_inst_os_keyboard" {
   default     = "en-US"
 }
 
-variable "vm_inst_os_image_standard_core" {
+variable "vm_inst_os_image_11_pro" {
   type        = string
   description = "The installation operating system image input for Microsoft Windows Standard Core."
   default     = null
-}
-
-variable "vm_inst_os_image_standard_desktop" {
-  type        = string
-  description = "The installation operating system image input for Microsoft Windows Standard."
-  default     = null  
 }
 
 variable "vm_inst_os_kms_key_standard" {
