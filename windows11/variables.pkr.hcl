@@ -357,6 +357,12 @@ variable "common_shutdown_timeout" {
 
 // Communicator Settings and Credentials
 
+variable "admin_password" {
+  type        = string
+  description = "The username to login to the guest operating system as Administrator."
+  sensitive   = true
+}
+
 variable "build_username" {
   type        = string
   description = "The username to login to the guest operating system."

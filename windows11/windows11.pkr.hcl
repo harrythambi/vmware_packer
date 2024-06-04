@@ -92,6 +92,7 @@ source "vsphere-iso" "windows-11-pro" {
   ]
   cd_content = {
     "autounattend.xml" = templatefile("${abspath(path.root)}/config/auto.pkrtpl.hcl", {
+      admin_password       = var.admin_password
       build_username       = var.build_username
       build_password       = var.build_password
       vm_inst_os_language  = var.vm_inst_os_language
