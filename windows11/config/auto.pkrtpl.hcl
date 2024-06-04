@@ -194,10 +194,11 @@
                     <Order>4</Order>
                     <!-- Run Setup Script -->
                     <Description>Basic configuration</Description>
-                    <CommandLine>%SystemRoot%\system32\WindowsPowerShell\v1.0\powershell.exe -File F:\setup\setup.ps1/CommandLine>
-                </SynchronousCommand>
-            </FirstLogonCommands>
-        </component>
-    </settings>
-    <cpi:offlineImage cpi:source="wim:c:/wims/install.wim#Windows Server 2022 ${vm_windows_image}" xmlns:cpi="urn:schemas-microsoft-com:cpi" />
+                    <CommandLine>%SystemRoot%\system32\WindowsPowerShell\v1.0\powershell.exe -File F:\setup\setup.ps1</CommandLine>
+               <Order>4</Order>
+               <Description>Initial Configuration</Description>
+            </SynchronousCommand>
+         </FirstLogonCommands>
+      </component>
+   </settings>
 </unattend>
