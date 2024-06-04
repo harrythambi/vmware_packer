@@ -13,8 +13,8 @@
                 <UILanguage>en-US</UILanguage>
             </SetupUILanguage>
             <InputLocale>${vm_guest_os_keyboard}</InputLocale>
-            <SystemLocale>${vm_guest_os_systemlocale}</SystemLocale>
-            <UILanguage>${vm_guest_os_systemlocale}</UILanguage>
+            <SystemLocale>${vm_guest_os_language}</SystemLocale>
+            <UILanguage>${vm_guest_os_language}</UILanguage>
             <UserLocale>${vm_guest_os_language}</UserLocale>
         </component>
         <component name="Microsoft-Windows-Setup" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS" xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
@@ -136,7 +136,7 @@
     </settings>    
     <settings pass="oobeSystem">
         <component name="Microsoft-Windows-International-Core" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS" xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-                <SystemLocale>${vm_guest_os_systemlocale}</SystemLocale>
+                <SystemLocale>${vm_guest_os_language}</SystemLocale>
         </component>    
         <component name="Microsoft-Windows-Shell-Setup" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS" xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
             <AutoLogon>
