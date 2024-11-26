@@ -10,8 +10,8 @@
 // Installation Operating System Metadata
 vm_inst_os_language                 = "en-US"
 vm_inst_os_keyboard                 = "en-US"
-vm_inst_os_image_standard_core      = "Windows Server 2022 SERVERSTANDARDCORE"
-vm_inst_os_image_standard_desktop   = "Windows Server 2022 SERVERSTANDARD"
+# vm_inst_os_image_standard_core      = "Windows Server 2022 SERVERSTANDARDCORE"
+# vm_inst_os_image_standard_desktop   = "Windows Server 2022 SERVERSTANDARD"
 vm_inst_os_kms_key_standard         = "VDYBN-27WPP-V4HQT-9VMD4-VMK7H"
 vm_inst_os_image_datacenter_core    = "Windows Server 2022 SERVERDATACENTERCORE"
 vm_inst_os_image_datacenter_desktop = "Windows Server 2022 SERVERDATACENTER"
