@@ -88,7 +88,7 @@
                <!-- Get-WindowsImage -ImagePath D:\sources\install.wim -->
                   <MetaData wcm:action="add">
                         <Key>/IMAGE/INDEX </Key>
-                        <Value>2</Value>
+                        <Value>${vm_inst_os_image}</Value>
                   </MetaData>
                </InstallFrom>
                <InstallTo>

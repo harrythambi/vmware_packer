@@ -232,6 +232,10 @@ build {
     inline            = var.inline
   }
 
+  provisioner "powershell" {
+    inline = ["powershell.exe -File F:\\setup\\cloudbase-init-install.ps1"]
+  }
+
   provisioner "windows-update" {
     pause_before    = "30s"
     search_criteria = "IsInstalled=0"
