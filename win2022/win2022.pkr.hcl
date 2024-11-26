@@ -236,18 +236,18 @@ build {
     inline = ["powershell.exe -File F:\\setup\\cloudbase-init-install.ps1"]
   }
 
-  provisioner "windows-update" {
-    pause_before    = "30s"
-    search_criteria = "IsInstalled=0"
-    filters = [
-      "exclude:$_.Title -like '*VMware*'",
-      "exclude:$_.Title -like '*Preview*'",
-      "exclude:$_.Title -like '*Defender*'",
-      "exclude:$_.InstallationBehavior.CanRequestUserInput",
-      "include:$true"
-    ]
-    restart_timeout = "120m"
-  }
+  # provisioner "windows-update" {
+  #   pause_before    = "30s"
+  #   search_criteria = "IsInstalled=0"
+  #   filters = [
+  #     "exclude:$_.Title -like '*VMware*'",
+  #     "exclude:$_.Title -like '*Preview*'",
+  #     "exclude:$_.Title -like '*Defender*'",
+  #     "exclude:$_.InstallationBehavior.CanRequestUserInput",
+  #     "include:$true"
+  #   ]
+  #   restart_timeout = "120m"
+  # }
 
   post-processor "manifest" {
     output     = "manifest_${local.manifest_date}.json"
