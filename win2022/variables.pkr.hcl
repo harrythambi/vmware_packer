@@ -78,13 +78,13 @@ variable "vm_inst_os_keyboard" {
 variable "vm_inst_os_image_standard_core" {
   type        = string
   description = "The installation operating system image input for Microsoft Windows Standard Core."
-  default     = null
+  default     = "Windows Server 2022 SERVERSTANDARDCORE"
 }
 
 variable "vm_inst_os_image_standard_desktop" {
   type        = string
   description = "The installation operating system image input for Microsoft Windows Standard."
-  default     = null  
+  default     = "Windows Server 2022 SERVERSTANDARD"
 }
 
 variable "vm_inst_os_kms_key_standard" {
