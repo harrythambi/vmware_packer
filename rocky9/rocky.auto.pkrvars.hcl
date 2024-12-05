@@ -1,5 +1,5 @@
 # ISO Settings
-os_iso_file                     = "Rocky-9.4-x86_64-dvd.iso"
+os_iso_file                     = "/Rocky-9.4-x86_64-minimal.iso"
 os_iso_path                     = "ISOs"
 
 # OS Meta Data
