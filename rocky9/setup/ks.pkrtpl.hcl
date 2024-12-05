@@ -106,7 +106,8 @@ unzip
 dnf makecache
 dnf install epel-release -y
 dnf makecache
-dnf install -y sudo open-vm-tools perl bind-utils cloud-init dbus_tools bc
+dnf install -y sudo open-vm-tools perl 
+dnf install -y cloud-init
 systemctl enable fstrim.timer
 systemctl enable cloud-init-local
 systemctl enable cloud-init
